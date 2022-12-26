@@ -1,0 +1,25 @@
+RewriteEngine On 
+
+#remove /index.php at the end of URL
+RewriteCond %{THE_REQUEST} ^.*/index.php
+RewriteRule ^(.*)index.php$ /$1 [R=301,L] 
+
+
+#remove / at the end of URL
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)/$ /$1 [L,R=301]
+
+#remove *.php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php
+
+
+#site https
+RewriteCond %{SERVER_PORT} 80
+RewriteCond %{HTTP_HOST} ^(www\.)?tumejorsonrisa\.com\.ar
+RewriteRule ^(.*)$ https://www.tumejorsonrisa.com.ar/$1 [R,L]
+
+
+
